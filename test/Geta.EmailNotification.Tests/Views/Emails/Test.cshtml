@@ -1,0 +1,17 @@
+﻿@using Geta.EmailNotification
+
+@model EmailNotificationRequest
+<html>
+<body>
+    <p>Sent: @ViewBag.Date</p>
+    <p>
+        Dear @Model.To.First().Address
+    </p>
+    <p>
+        <a href="@Url.Absolute("~/")">This is a link</a>
+    </p>
+    <p>
+        <img src="@Url.Absolute("~/Content/dummy.png")" alt="" />
+    </p>
+</body>
+</html>
