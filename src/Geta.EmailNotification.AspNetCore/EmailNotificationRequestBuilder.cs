@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using Geta.EmailNotification.AspNetCore;
-using Geta.EmailNotification.Shared;
+﻿using Geta.EmailNotification.Shared;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace Geta.EmailNotification
+namespace Geta.EmailNotification.AspNetCore
 {
     public class EmailNotificationRequestBuilder : EmailNotificationRequestBuilderBase
     {
@@ -12,10 +12,9 @@ namespace Geta.EmailNotification
         /// Creates new instance of EmailNotificationRequestBuilder.
         /// </summary>
         /// <param name="request">Existing EmailNotificationRequest from which to copy values. Creates empty EmailNotificationRequest if null passed.</param>
-        public EmailNotificationRequestBuilder(IEmailNotificationRequest request = null) : base(request)
+        public EmailNotificationRequestBuilder(EmailNotificationRequest request) : base(request)
         {
-            var emailRequest = request != null ? Clone(request) as EmailNotificationRequest : new EmailNotificationRequest();
-            _request = emailRequest;
+            _request = request;
         }
 
         /// <summary>
@@ -24,7 +23,7 @@ namespace Geta.EmailNotification
         /// <param name="key">Key of the value.</param>
         /// <param name="value">Value.</param>
         /// <returns>Current EmailNotificationRequestBuilder instance.</returns>
-        public EmailNotificationRequestBuilder WithViewData(string key, object value)
+        public IEmailNotificationRequestBuilder WithViewData(string key, object value)
         {
             _request.ViewData.Add(key, value);
             return this;
@@ -35,12 +34,13 @@ namespace Geta.EmailNotification
         /// </summary>
         /// <param name="dictionary">Dictionary of ViewData values.</param>
         /// <returns>Current EmailNotificationRequestBuilder instance.</returns>
-        public EmailNotificationRequestBuilder WithViewData(ViewDataDictionary dictionary)
+        public IEmailNotificationRequestBuilder WithViewData(ViewDataDictionary dictionary)
         {
             foreach (var pair in dictionary)
             {
                 _request.ViewData.Add(pair);
             }
+
             return this;
         }
 
@@ -49,27 +49,16 @@ namespace Geta.EmailNotification
         /// </summary>
         /// <param name="value">View model's value.</param>
         /// <returns>Current EmailNotificationRequestBuilder instance.</returns>
-        public EmailNotificationRequestBuilder WithViewModel(object value)
+        public IEmailNotificationRequestBuilder WithViewModel(object value)
         {
             _request.ViewData.Model = value;
             return this;
         }
 
-        private static IEmailNotificationRequest Clone(IEmailNotificationRequest request)
+        public IEmailNotificationRequestBuilder WithHttpContext(HttpContext httpContext)
         {
-            var emailRequest = request as EmailNotificationRequest;
-
-            // Do not clone with .WithViewModel(...) as it is cloned already with .WithViewData(...)
-            return new EmailNotificationRequestBuilder()
-                .WithAttachments(request.Attachments)
-                .WithBcc(request.Bcc)
-                .WithCc(request.Cc)
-                .WithTo(request.To)
-                .WithFrom(request.From.Address, request.From.DisplayName)
-                .WithSubject(request.Subject)
-                .WithViewName(request.ViewName)
-                .WithViewData(emailRequest?.ViewData)
-                .Build();
+            _request.HttpContext = httpContext;
+            return this;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Geta.EmailNotification.Postmark.Extensions;
+using Geta.EmailNotification.Shared;
 using PostmarkDotNet;
 
 namespace Geta.EmailNotification.Postmark
@@ -12,7 +13,7 @@ namespace Geta.EmailNotification.Postmark
             _mailMessageFactory = mailMessageFactory;
         }
 
-        public PostmarkMessage Create(EmailNotificationRequest request)
+        public PostmarkMessage Create(IEmailNotificationRequest request)
         {
             return _mailMessageFactory.Create(request).ToPostmarkMessage();
         }

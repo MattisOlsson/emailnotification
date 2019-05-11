@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Geta.EmailNotification.Shared;
 
 namespace Geta.EmailNotification
 {
@@ -36,13 +38,18 @@ namespace Geta.EmailNotification
         /// <param name="email">The email to render.</param>
         /// <param name="viewName">Optional email view name override. If null then the email's ViewName property is used instead.</param>
         /// <returns>The rendered email view output.</returns>
-        public string Render(EmailNotificationRequest email, string viewName = null)
+        public string Render(IEmailNotificationRequest email, string viewName = null)
         {
             viewName = viewName ?? email.ViewName;
             var controllerContext = CreateControllerContext();
             var view = CreateView(viewName, controllerContext);
-            var viewOutput = RenderView(view, email.ViewData, controllerContext);
+            var viewOutput = RenderView(view, ((EmailNotificationRequest)email).ViewData, controllerContext);
             return viewOutput;
+        }
+
+        public Task<string> RenderAsync(IEmailNotificationRequest email, string viewName = null)
+        {
+            throw new NotImplementedException();
         }
 
         ControllerContext CreateControllerContext()

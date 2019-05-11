@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Amazon.SimpleEmail;
 using Amazon.SimpleEmail.Model;
+using Geta.EmailNotification.Shared;
 
 namespace Geta.EmailNotification.Amazon
 {
@@ -21,13 +22,13 @@ namespace Geta.EmailNotification.Amazon
             _simpleEmailServiceClient = simpleEmailServiceClient;
         }
 
-        public EmailNotificationResponse Send(EmailNotificationRequest request)
+        public EmailNotificationResponse Send(IEmailNotificationRequest request)
         {
             try
             {
                 var amazonRequest = CreateRequest(request);
 
-                var response = _simpleEmailServiceClient.SendEmail(amazonRequest);
+                var response = AsyncHelper.RunSync(() => _simpleEmailServiceClient.SendEmailAsync(amazonRequest));
 
                 return new EmailNotificationResponse
                 {
@@ -45,7 +46,7 @@ namespace Geta.EmailNotification.Amazon
             }
         }
 
-        public async Task<EmailNotificationResponse> SendAsync(EmailNotificationRequest request)
+        public async Task<EmailNotificationResponse> SendAsync(IEmailNotificationRequest request)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace Geta.EmailNotification.Amazon
             }
         }
 
-        private static SendEmailRequest CreateRequest(EmailNotificationRequest request)
+        private static SendEmailRequest CreateRequest(IEmailNotificationRequest request)
         {
             if (request == null)
             {

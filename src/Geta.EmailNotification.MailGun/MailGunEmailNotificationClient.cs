@@ -1,4 +1,5 @@
 ﻿using System;
+using Geta.EmailNotification.Shared;
 using Typesafe.Mailgun;
 
 namespace Geta.EmailNotification.MailGun
@@ -22,7 +23,7 @@ namespace Geta.EmailNotification.MailGun
             _mailMessageFactory = mailMessageFactory;
         }
 
-        public EmailNotificationResponse Send(EmailNotificationRequest request)
+        public EmailNotificationResponse Send(IEmailNotificationRequest request)
         {
             try
             {

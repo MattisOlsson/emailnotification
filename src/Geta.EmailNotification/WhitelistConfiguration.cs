@@ -1,9 +1,10 @@
-using System.Configuration;
+﻿using System.Configuration;
 using System.Linq;
+using Geta.EmailNotification.Shared;
 
 namespace Geta.EmailNotification
 {
-    public class WhitelistConfiguration
+    public class WhitelistConfiguration : IWhitelistConfiguration
     {
         private string[] _emails = new string[0];
         private string[] _domains = new string[0];

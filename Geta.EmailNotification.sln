@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.EmailNotification.Mail
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geta.EmailNotification.SendGrid", "src\Geta.EmailNotification.SendGrid\Geta.EmailNotification.SendGrid.csproj", "{EA4D5EFA-E6B1-4FD2-A28E-A4724BDACB2C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.EmailNotification.Shared", "src\Geta.EmailNotification.Shared\Geta.EmailNotification.Shared.csproj", "{46267FDA-9D41-412A-9CBB-C06C557EFA47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geta.EmailNotification.AspNetCore", "src\Geta.EmailNotification.AspNetCore\Geta.EmailNotification.AspNetCore.csproj", "{D2588CD0-63F5-4890-B41D-51CC4AE07CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{EA4D5EFA-E6B1-4FD2-A28E-A4724BDACB2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA4D5EFA-E6B1-4FD2-A28E-A4724BDACB2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA4D5EFA-E6B1-4FD2-A28E-A4724BDACB2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46267FDA-9D41-412A-9CBB-C06C557EFA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46267FDA-9D41-412A-9CBB-C06C557EFA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46267FDA-9D41-412A-9CBB-C06C557EFA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46267FDA-9D41-412A-9CBB-C06C557EFA47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2588CD0-63F5-4890-B41D-51CC4AE07CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2588CD0-63F5-4890-B41D-51CC4AE07CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2588CD0-63F5-4890-B41D-51CC4AE07CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2588CD0-63F5-4890-B41D-51CC4AE07CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
